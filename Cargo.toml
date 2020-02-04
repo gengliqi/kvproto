@@ -9,5 +9,5 @@ name = "kvproto"
 [dependencies]
 protobuf = "~2.0"
 futures = "0.1"
-grpcio = "0.3"
+grpcio = { git = "https://github.com/gengliqi/grpc-rs.git", branch = "upgrade-1.8.1"}
 raft = "0.4.2"
