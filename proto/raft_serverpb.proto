@@ -83,9 +83,12 @@ enum PeerState {
 }
 
 message MergeState {
+    // used for source region
     uint64 min_index = 1;
     metapb.Region target = 2;
     uint64 commit = 3;
+    // used for target region record source region id before applying snapshot
+    repeated uint64 source_region_ids = 4;
 }
 
 message RegionLocalState {
