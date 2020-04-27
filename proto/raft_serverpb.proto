@@ -23,6 +23,7 @@ message RaftMessage {
     // If it has value, to_peer should be removed if merge is never going to complete.
     metapb.Region merge_target = 9;
     ExtraMessage extra_msg = 10;
+    bool target_all_exist = 11;
 }
 
 message RaftTruncatedState {
@@ -89,6 +90,7 @@ message MergeState {
     uint64 min_index = 1;
     metapb.Region target = 2;
     uint64 commit = 3;
+    bool target_all_exist = 4;
 }
 
 message RegionLocalState {

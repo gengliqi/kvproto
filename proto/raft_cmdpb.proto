@@ -171,6 +171,7 @@ message VerifyHashResponse {}
 message PrepareMergeRequest {
     uint64 min_index = 1;
     metapb.Region target = 2;
+    bool target_all_exist = 3;
 }
 
 message PrepareMergeResponse {}
@@ -179,6 +180,7 @@ message CommitMergeRequest {
     metapb.Region source = 1;
     uint64 commit = 2;
     repeated eraftpb.Entry entries = 3;
+    bool target_all_exist = 4;
 }
 
 message CommitMergeResponse {}

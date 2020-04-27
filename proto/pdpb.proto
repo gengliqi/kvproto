@@ -316,6 +316,7 @@ message TransferLeader {
 
 message Merge {
     metapb.Region target = 1;
+    bool target_all_exist = 2;
 }
 
 message SplitRegion {
