@@ -2,6 +2,7 @@ syntax = "proto3";
 package debugpb;
 
 import "eraftpb.proto";
+import "metapb.proto";
 import "kvrpcpb.proto";
 import "raft_serverpb.proto";
 import "gogoproto/gogo.proto";
@@ -70,6 +71,9 @@ service Debug {
 
     // Get cluster ID
     rpc GetClusterInfo(GetClusterInfoRequest) returns (GetClusterInfoResponse) {}
+
+    // Collect total peer current state
+    rpc CollectPeerCurrentState(CollectPeerCurrentStateRequest) returns (CollectPeerCurrentStateResponse) {}
 }
 
 enum DB {
@@ -247,4 +251,20 @@ message GetClusterInfoRequest {
 
 message GetClusterInfoResponse {
     uint64 cluster_id = 1;
+}
+
+message CollectPeerCurrentStateRequest {
+}
+
+message PeerCurrentState {
+    bool valid = 1;
+    metapb.Region region = 2;
+    uint64 peer_id = 3;
+    uint64 leader_id = 4;
+    uint64 last_index = 5;
+    uint64 applied_index = 6;
+}
+
+message CollectPeerCurrentStateResponse {
+    repeated PeerCurrentState states = 1;
 }
