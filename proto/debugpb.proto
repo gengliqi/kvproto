@@ -258,11 +258,12 @@ message CollectPeerCurrentStateRequest {
 
 message PeerCurrentState {
     bool valid = 1;
-    metapb.Region region = 2;
-    uint64 peer_id = 3;
-    uint64 leader_id = 4;
-    uint64 last_index = 5;
-    uint64 applied_index = 6;
+    uint64 region_id = 2;
+    metapb.Region region = 3;
+    uint64 peer_id = 4;
+    uint64 leader_id = 5;
+    uint64 last_index = 6;
+    uint64 applied_index = 7;
 }
 
 message CollectPeerCurrentStateResponse {
