@@ -5173,6 +5173,681 @@ impl ::protobuf::reflect::ProtobufValue for GetRegionPropertiesResponse {
     }
 }
 
+#[derive(PartialEq,Clone,Default)]
+pub struct CollectPeerCurrentStateRequest {
+    // message fields
+    pub timeout_secs: u64,
+    // special fields
+    unknown_fields: ::protobuf::UnknownFields,
+    cached_size: ::protobuf::CachedSize,
+}
+
+impl CollectPeerCurrentStateRequest {
+    pub fn new() -> CollectPeerCurrentStateRequest {
+        ::std::default::Default::default()
+    }
+
+    // uint64 timeout_secs = 1;
+
+    pub fn clear_timeout_secs(&mut self) {
+        self.timeout_secs = 0;
+    }
+
+    // Param is passed by value, moved
+    pub fn set_timeout_secs(&mut self, v: u64) {
+        self.timeout_secs = v;
+    }
+
+    pub fn get_timeout_secs(&self) -> u64 {
+        self.timeout_secs
+    }
+}
+
+impl ::protobuf::Message for CollectPeerCurrentStateRequest {
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::protobuf::CodedInputStream) -> ::protobuf::ProtobufResult<()> {
+        while !is.eof()? {
+            let (field_number, wire_type) = is.read_tag_unpack()?;
+            match field_number {
+                1 => {
+                    if wire_type != ::protobuf::wire_format::WireTypeVarint {
+                        return ::std::result::Result::Err(::protobuf::rt::unexpected_wire_type(wire_type));
+                    }
+                    let tmp = is.read_uint64()?;
+                    self.timeout_secs = tmp;
+                },
+                _ => {
+                    ::protobuf::rt::read_unknown_or_skip_group(field_number, wire_type, is, self.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u32 {
+        let mut my_size = 0;
+        if self.timeout_secs != 0 {
+            my_size += ::protobuf::rt::value_size(1, self.timeout_secs, ::protobuf::wire_format::WireTypeVarint);
+        }
+        my_size += ::protobuf::rt::unknown_fields_size(self.get_unknown_fields());
+        self.cached_size.set(my_size);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::protobuf::CodedOutputStream) -> ::protobuf::ProtobufResult<()> {
+        if self.timeout_secs != 0 {
+            os.write_uint64(1, self.timeout_secs)?;
+        }
+        os.write_unknown_fields(self.get_unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn get_cached_size(&self) -> u32 {
+        self.cached_size.get()
+    }
+
+    fn get_unknown_fields(&self) -> &::protobuf::UnknownFields {
+        &self.unknown_fields
+    }
+
+    fn mut_unknown_fields(&mut self) -> &mut ::protobuf::UnknownFields {
+        &mut self.unknown_fields
+    }
+
+    fn as_any(&self) -> &::std::any::Any {
+        self as &::std::any::Any
+    }
+    fn as_any_mut(&mut self) -> &mut ::std::any::Any {
+        self as &mut ::std::any::Any
+    }
+    fn into_any(self: Box<Self>) -> ::std::boxed::Box<::std::any::Any> {
+        self
+    }
+
+    fn descriptor(&self) -> &'static ::protobuf::reflect::MessageDescriptor {
+        Self::descriptor_static()
+    }
+
+    fn new() -> CollectPeerCurrentStateRequest {
+        CollectPeerCurrentStateRequest::new()
+    }
+
+    fn default_instance() -> &'static CollectPeerCurrentStateRequest {
+        static mut instance: ::protobuf::lazy::Lazy<CollectPeerCurrentStateRequest> = ::protobuf::lazy::Lazy {
+            lock: ::protobuf::lazy::ONCE_INIT,
+            ptr: 0 as *const CollectPeerCurrentStateRequest,
+        };
+        unsafe {
+            instance.get(CollectPeerCurrentStateRequest::new)
+        }
+    }
+}
+
+impl ::protobuf::Clear for CollectPeerCurrentStateRequest {
+    fn clear(&mut self) {
+        self.clear_timeout_secs();
+        self.unknown_fields.clear();
+    }
+}
+
+impl crate::text::PbPrint for CollectPeerCurrentStateRequest {
+    #[allow(unused_variables)]
+    fn fmt(&self, name: &str, buf: &mut String) {
+        crate::text::push_message_start(name, buf);
+        let old_len = buf.len();
+        crate::text::PbPrint::fmt(&self.timeout_secs, "timeout_secs", buf);
+        if old_len < buf.len() {
+          buf.push(' ');
+        }
+        buf.push('}');
+    }
+}
+impl ::std::fmt::Debug for CollectPeerCurrentStateRequest {
+    #[allow(unused_variables)]
+    fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
+        let mut s = String::new();
+        crate::text::PbPrint::fmt(&self.timeout_secs, "timeout_secs", &mut s);
+        write!(f, "{}", s)
+    }
+}
+
+impl ::protobuf::reflect::ProtobufValue for CollectPeerCurrentStateRequest {
+    fn as_ref(&self) -> ::protobuf::reflect::ProtobufValueRef {
+        ::protobuf::reflect::ProtobufValueRef::Message(self)
+    }
+}
+
+#[derive(PartialEq,Clone,Default)]
+pub struct PeerCurrentState {
+    // message fields
+    pub region_id: u64,
+    pub valid: bool,
+    pub region: ::protobuf::SingularPtrField<super::metapb::Region>,
+    pub peer_id: u64,
+    pub leader_id: u64,
+    pub last_index: u64,
+    pub applied_index: u64,
+    // special fields
+    unknown_fields: ::protobuf::UnknownFields,
+    cached_size: ::protobuf::CachedSize,
+}
+
+impl PeerCurrentState {
+    pub fn new() -> PeerCurrentState {
+        ::std::default::Default::default()
+    }
+
+    // uint64 region_id = 1;
+
+    pub fn clear_region_id(&mut self) {
+        self.region_id = 0;
+    }
+
+    // Param is passed by value, moved
+    pub fn set_region_id(&mut self, v: u64) {
+        self.region_id = v;
+    }
+
+    pub fn get_region_id(&self) -> u64 {
+        self.region_id
+    }
+
+    // bool valid = 2;
+
+    pub fn clear_valid(&mut self) {
+        self.valid = false;
+    }
+
+    // Param is passed by value, moved
+    pub fn set_valid(&mut self, v: bool) {
+        self.valid = v;
+    }
+
+    pub fn get_valid(&self) -> bool {
+        self.valid
+    }
+
+    // .metapb.Region region = 3;
+
+    pub fn clear_region(&mut self) {
+        self.region.clear();
+    }
+
+    pub fn has_region(&self) -> bool {
+        self.region.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_region(&mut self, v: super::metapb::Region) {
+        self.region = ::protobuf::SingularPtrField::some(v);
+    }
+
+    // Mutable pointer to the field.
+    // If field is not initialized, it is initialized with default value first.
+    pub fn mut_region(&mut self) -> &mut super::metapb::Region {
+        if self.region.is_none() {
+            self.region.set_default();
+        }
+        self.region.as_mut().unwrap()
+    }
+
+    // Take field
+    pub fn take_region(&mut self) -> super::metapb::Region {
+        self.region.take().unwrap_or_else(|| super::metapb::Region::new())
+    }
+
+    pub fn get_region(&self) -> &super::metapb::Region {
+        self.region.as_ref().unwrap_or_else(|| super::metapb::Region::default_instance())
+    }
+
+    // uint64 peer_id = 4;
+
+    pub fn clear_peer_id(&mut self) {
+        self.peer_id = 0;
+    }
+
+    // Param is passed by value, moved
+    pub fn set_peer_id(&mut self, v: u64) {
+        self.peer_id = v;
+    }
+
+    pub fn get_peer_id(&self) -> u64 {
+        self.peer_id
+    }
+
+    // uint64 leader_id = 5;
+
+    pub fn clear_leader_id(&mut self) {
+        self.leader_id = 0;
+    }
+
+    // Param is passed by value, moved
+    pub fn set_leader_id(&mut self, v: u64) {
+        self.leader_id = v;
+    }
+
+    pub fn get_leader_id(&self) -> u64 {
+        self.leader_id
+    }
+
+    // uint64 last_index = 6;
+
+    pub fn clear_last_index(&mut self) {
+        self.last_index = 0;
+    }
+
+    // Param is passed by value, moved
+    pub fn set_last_index(&mut self, v: u64) {
+        self.last_index = v;
+    }
+
+    pub fn get_last_index(&self) -> u64 {
+        self.last_index
+    }
+
+    // uint64 applied_index = 7;
+
+    pub fn clear_applied_index(&mut self) {
+        self.applied_index = 0;
+    }
+
+    // Param is passed by value, moved
+    pub fn set_applied_index(&mut self, v: u64) {
+        self.applied_index = v;
+    }
+
+    pub fn get_applied_index(&self) -> u64 {
+        self.applied_index
+    }
+}
+
+impl ::protobuf::Message for PeerCurrentState {
+    fn is_initialized(&self) -> bool {
+        for v in &self.region {
+            if !v.is_initialized() {
+                return false;
+            }
+        };
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::protobuf::CodedInputStream) -> ::protobuf::ProtobufResult<()> {
+        while !is.eof()? {
+            let (field_number, wire_type) = is.read_tag_unpack()?;
+            match field_number {
+                1 => {
+                    if wire_type != ::protobuf::wire_format::WireTypeVarint {
+                        return ::std::result::Result::Err(::protobuf::rt::unexpected_wire_type(wire_type));
+                    }
+                    let tmp = is.read_uint64()?;
+                    self.region_id = tmp;
+                },
+                2 => {
+                    if wire_type != ::protobuf::wire_format::WireTypeVarint {
+                        return ::std::result::Result::Err(::protobuf::rt::unexpected_wire_type(wire_type));
+                    }
+                    let tmp = is.read_bool()?;
+                    self.valid = tmp;
+                },
+                3 => {
+                    ::protobuf::rt::read_singular_message_into(wire_type, is, &mut self.region)?;
+                },
+                4 => {
+                    if wire_type != ::protobuf::wire_format::WireTypeVarint {
+                        return ::std::result::Result::Err(::protobuf::rt::unexpected_wire_type(wire_type));
+                    }
+                    let tmp = is.read_uint64()?;
+                    self.peer_id = tmp;
+                },
+                5 => {
+                    if wire_type != ::protobuf::wire_format::WireTypeVarint {
+                        return ::std::result::Result::Err(::protobuf::rt::unexpected_wire_type(wire_type));
+                    }
+                    let tmp = is.read_uint64()?;
+                    self.leader_id = tmp;
+                },
+                6 => {
+                    if wire_type != ::protobuf::wire_format::WireTypeVarint {
+                        return ::std::result::Result::Err(::protobuf::rt::unexpected_wire_type(wire_type));
+                    }
+                    let tmp = is.read_uint64()?;
+                    self.last_index = tmp;
+                },
+                7 => {
+                    if wire_type != ::protobuf::wire_format::WireTypeVarint {
+                        return ::std::result::Result::Err(::protobuf::rt::unexpected_wire_type(wire_type));
+                    }
+                    let tmp = is.read_uint64()?;
+                    self.applied_index = tmp;
+                },
+                _ => {
+                    ::protobuf::rt::read_unknown_or_skip_group(field_number, wire_type, is, self.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u32 {
+        let mut my_size = 0;
+        if self.region_id != 0 {
+            my_size += ::protobuf::rt::value_size(1, self.region_id, ::protobuf::wire_format::WireTypeVarint);
+        }
+        if self.valid != false {
+            my_size += 2;
+        }
+        if let Some(ref v) = self.region.as_ref() {
+            let len = v.compute_size();
+            my_size += 1 + ::protobuf::rt::compute_raw_varint32_size(len) + len;
+        }
+        if self.peer_id != 0 {
+            my_size += ::protobuf::rt::value_size(4, self.peer_id, ::protobuf::wire_format::WireTypeVarint);
+        }
+        if self.leader_id != 0 {
+            my_size += ::protobuf::rt::value_size(5, self.leader_id, ::protobuf::wire_format::WireTypeVarint);
+        }
+        if self.last_index != 0 {
+            my_size += ::protobuf::rt::value_size(6, self.last_index, ::protobuf::wire_format::WireTypeVarint);
+        }
+        if self.applied_index != 0 {
+            my_size += ::protobuf::rt::value_size(7, self.applied_index, ::protobuf::wire_format::WireTypeVarint);
+        }
+        my_size += ::protobuf::rt::unknown_fields_size(self.get_unknown_fields());
+        self.cached_size.set(my_size);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::protobuf::CodedOutputStream) -> ::protobuf::ProtobufResult<()> {
+        if self.region_id != 0 {
+            os.write_uint64(1, self.region_id)?;
+        }
+        if self.valid != false {
+            os.write_bool(2, self.valid)?;
+        }
+        if let Some(ref v) = self.region.as_ref() {
+            os.write_tag(3, ::protobuf::wire_format::WireTypeLengthDelimited)?;
+            os.write_raw_varint32(v.get_cached_size())?;
+            v.write_to_with_cached_sizes(os)?;
+        }
+        if self.peer_id != 0 {
+            os.write_uint64(4, self.peer_id)?;
+        }
+        if self.leader_id != 0 {
+            os.write_uint64(5, self.leader_id)?;
+        }
+        if self.last_index != 0 {
+            os.write_uint64(6, self.last_index)?;
+        }
+        if self.applied_index != 0 {
+            os.write_uint64(7, self.applied_index)?;
+        }
+        os.write_unknown_fields(self.get_unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn get_cached_size(&self) -> u32 {
+        self.cached_size.get()
+    }
+
+    fn get_unknown_fields(&self) -> &::protobuf::UnknownFields {
+        &self.unknown_fields
+    }
+
+    fn mut_unknown_fields(&mut self) -> &mut ::protobuf::UnknownFields {
+        &mut self.unknown_fields
+    }
+
+    fn as_any(&self) -> &::std::any::Any {
+        self as &::std::any::Any
+    }
+    fn as_any_mut(&mut self) -> &mut ::std::any::Any {
+        self as &mut ::std::any::Any
+    }
+    fn into_any(self: Box<Self>) -> ::std::boxed::Box<::std::any::Any> {
+        self
+    }
+
+    fn descriptor(&self) -> &'static ::protobuf::reflect::MessageDescriptor {
+        Self::descriptor_static()
+    }
+
+    fn new() -> PeerCurrentState {
+        PeerCurrentState::new()
+    }
+
+    fn default_instance() -> &'static PeerCurrentState {
+        static mut instance: ::protobuf::lazy::Lazy<PeerCurrentState> = ::protobuf::lazy::Lazy {
+            lock: ::protobuf::lazy::ONCE_INIT,
+            ptr: 0 as *const PeerCurrentState,
+        };
+        unsafe {
+            instance.get(PeerCurrentState::new)
+        }
+    }
+}
+
+impl ::protobuf::Clear for PeerCurrentState {
+    fn clear(&mut self) {
+        self.clear_region_id();
+        self.clear_valid();
+        self.clear_region();
+        self.clear_peer_id();
+        self.clear_leader_id();
+        self.clear_last_index();
+        self.clear_applied_index();
+        self.unknown_fields.clear();
+    }
+}
+
+impl crate::text::PbPrint for PeerCurrentState {
+    #[allow(unused_variables)]
+    fn fmt(&self, name: &str, buf: &mut String) {
+        crate::text::push_message_start(name, buf);
+        let old_len = buf.len();
+        crate::text::PbPrint::fmt(&self.region_id, "region_id", buf);
+        crate::text::PbPrint::fmt(&self.valid, "valid", buf);
+        crate::text::PbPrint::fmt(&self.region, "region", buf);
+        crate::text::PbPrint::fmt(&self.peer_id, "peer_id", buf);
+        crate::text::PbPrint::fmt(&self.leader_id, "leader_id", buf);
+        crate::text::PbPrint::fmt(&self.last_index, "last_index", buf);
+        crate::text::PbPrint::fmt(&self.applied_index, "applied_index", buf);
+        if old_len < buf.len() {
+          buf.push(' ');
+        }
+        buf.push('}');
+    }
+}
+impl ::std::fmt::Debug for PeerCurrentState {
+    #[allow(unused_variables)]
+    fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
+        let mut s = String::new();
+        crate::text::PbPrint::fmt(&self.region_id, "region_id", &mut s);
+        crate::text::PbPrint::fmt(&self.valid, "valid", &mut s);
+        crate::text::PbPrint::fmt(&self.region, "region", &mut s);
+        crate::text::PbPrint::fmt(&self.peer_id, "peer_id", &mut s);
+        crate::text::PbPrint::fmt(&self.leader_id, "leader_id", &mut s);
+        crate::text::PbPrint::fmt(&self.last_index, "last_index", &mut s);
+        crate::text::PbPrint::fmt(&self.applied_index, "applied_index", &mut s);
+        write!(f, "{}", s)
+    }
+}
+
+impl ::protobuf::reflect::ProtobufValue for PeerCurrentState {
+    fn as_ref(&self) -> ::protobuf::reflect::ProtobufValueRef {
+        ::protobuf::reflect::ProtobufValueRef::Message(self)
+    }
+}
+
+#[derive(PartialEq,Clone,Default)]
+pub struct CollectPeerCurrentStateResponse {
+    // message fields
+    pub states: ::protobuf::RepeatedField<PeerCurrentState>,
+    // special fields
+    unknown_fields: ::protobuf::UnknownFields,
+    cached_size: ::protobuf::CachedSize,
+}
+
+impl CollectPeerCurrentStateResponse {
+    pub fn new() -> CollectPeerCurrentStateResponse {
+        ::std::default::Default::default()
+    }
+
+    // repeated .debugpb.PeerCurrentState states = 1;
+
+    pub fn clear_states(&mut self) {
+        self.states.clear();
+    }
+
+    // Param is passed by value, moved
+    pub fn set_states(&mut self, v: ::protobuf::RepeatedField<PeerCurrentState>) {
+        self.states = v;
+    }
+
+    // Mutable pointer to the field.
+    pub fn mut_states(&mut self) -> &mut ::protobuf::RepeatedField<PeerCurrentState> {
+        &mut self.states
+    }
+
+    // Take field
+    pub fn take_states(&mut self) -> ::protobuf::RepeatedField<PeerCurrentState> {
+        ::std::mem::replace(&mut self.states, ::protobuf::RepeatedField::new())
+    }
+
+    pub fn get_states(&self) -> &[PeerCurrentState] {
+        &self.states
+    }
+}
+
+impl ::protobuf::Message for CollectPeerCurrentStateResponse {
+    fn is_initialized(&self) -> bool {
+        for v in &self.states {
+            if !v.is_initialized() {
+                return false;
+            }
+        };
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::protobuf::CodedInputStream) -> ::protobuf::ProtobufResult<()> {
+        while !is.eof()? {
+            let (field_number, wire_type) = is.read_tag_unpack()?;
+            match field_number {
+                1 => {
+                    ::protobuf::rt::read_repeated_message_into(wire_type, is, &mut self.states)?;
+                },
+                _ => {
+                    ::protobuf::rt::read_unknown_or_skip_group(field_number, wire_type, is, self.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u32 {
+        let mut my_size = 0;
+        for value in &self.states {
+            let len = value.compute_size();
+            my_size += 1 + ::protobuf::rt::compute_raw_varint32_size(len) + len;
+        };
+        my_size += ::protobuf::rt::unknown_fields_size(self.get_unknown_fields());
+        self.cached_size.set(my_size);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::protobuf::CodedOutputStream) -> ::protobuf::ProtobufResult<()> {
+        for v in &self.states {
+            os.write_tag(1, ::protobuf::wire_format::WireTypeLengthDelimited)?;
+            os.write_raw_varint32(v.get_cached_size())?;
+            v.write_to_with_cached_sizes(os)?;
+        };
+        os.write_unknown_fields(self.get_unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn get_cached_size(&self) -> u32 {
+        self.cached_size.get()
+    }
+
+    fn get_unknown_fields(&self) -> &::protobuf::UnknownFields {
+        &self.unknown_fields
+    }
+
+    fn mut_unknown_fields(&mut self) -> &mut ::protobuf::UnknownFields {
+        &mut self.unknown_fields
+    }
+
+    fn as_any(&self) -> &::std::any::Any {
+        self as &::std::any::Any
+    }
+    fn as_any_mut(&mut self) -> &mut ::std::any::Any {
+        self as &mut ::std::any::Any
+    }
+    fn into_any(self: Box<Self>) -> ::std::boxed::Box<::std::any::Any> {
+        self
+    }
+
+    fn descriptor(&self) -> &'static ::protobuf::reflect::MessageDescriptor {
+        Self::descriptor_static()
+    }
+
+    fn new() -> CollectPeerCurrentStateResponse {
+        CollectPeerCurrentStateResponse::new()
+    }
+
+    fn default_instance() -> &'static CollectPeerCurrentStateResponse {
+        static mut instance: ::protobuf::lazy::Lazy<CollectPeerCurrentStateResponse> = ::protobuf::lazy::Lazy {
+            lock: ::protobuf::lazy::ONCE_INIT,
+            ptr: 0 as *const CollectPeerCurrentStateResponse,
+        };
+        unsafe {
+            instance.get(CollectPeerCurrentStateResponse::new)
+        }
+    }
+}
+
+impl ::protobuf::Clear for CollectPeerCurrentStateResponse {
+    fn clear(&mut self) {
+        self.clear_states();
+        self.unknown_fields.clear();
+    }
+}
+
+impl crate::text::PbPrint for CollectPeerCurrentStateResponse {
+    #[allow(unused_variables)]
+    fn fmt(&self, name: &str, buf: &mut String) {
+        crate::text::push_message_start(name, buf);
+        let old_len = buf.len();
+        crate::text::PbPrint::fmt(&self.states, "states", buf);
+        if old_len < buf.len() {
+          buf.push(' ');
+        }
+        buf.push('}');
+    }
+}
+impl ::std::fmt::Debug for CollectPeerCurrentStateResponse {
+    #[allow(unused_variables)]
+    fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
+        let mut s = String::new();
+        crate::text::PbPrint::fmt(&self.states, "states", &mut s);
+        write!(f, "{}", s)
+    }
+}
+
+impl ::protobuf::reflect::ProtobufValue for CollectPeerCurrentStateResponse {
+    fn as_ref(&self) -> ::protobuf::reflect::ProtobufValueRef {
+        ::protobuf::reflect::ProtobufValueRef::Message(self)
+    }
+}
+
 #[derive(Clone,PartialEq,Eq,Debug,Hash)]
 pub enum DB {
     INVALID = 0,

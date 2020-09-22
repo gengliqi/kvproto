@@ -2,6 +2,7 @@ syntax = "proto3";
 package debugpb;
 
 import "eraftpb.proto";
+import "metapb.proto";
 import "kvrpcpb.proto";
 import "raft_serverpb.proto";
 import "gogoproto/gogo.proto";
@@ -64,6 +65,9 @@ service Debug {
 
     // Get region properties
     rpc GetRegionProperties(GetRegionPropertiesRequest) returns (GetRegionPropertiesResponse) {}
+
+    // Collect total peer current state
+    rpc CollectPeerCurrentState(CollectPeerCurrentStateRequest) returns (CollectPeerCurrentStateResponse) {}
 }
 
 enum DB {
@@ -227,4 +231,22 @@ message GetRegionPropertiesRequest {
 
 message GetRegionPropertiesResponse {
     repeated Property props = 1;
+}
+
+message CollectPeerCurrentStateRequest {
+    uint64 timeout_secs = 1;
+}
+
+message PeerCurrentState {
+    uint64 region_id = 1;
+    bool valid = 2;
+    metapb.Region region = 3;
+    uint64 peer_id = 4;
+    uint64 leader_id = 5;
+    uint64 last_index = 6;
+    uint64 applied_index = 7;
+}
+
+message CollectPeerCurrentStateResponse {
+    repeated PeerCurrentState states = 1;
 }

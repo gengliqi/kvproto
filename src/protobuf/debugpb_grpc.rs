@@ -109,6 +109,13 @@ const METHOD_DEBUG_GET_REGION_PROPERTIES: ::grpcio::Method<super::debugpb::GetRe
     resp_mar: ::grpcio::Marshaller { ser: ::grpcio::pb_ser, de: ::grpcio::pb_de },
 };
 
+const METHOD_DEBUG_COLLECT_PEER_CURRENT_STATE: ::grpcio::Method<super::debugpb::CollectPeerCurrentStateRequest, super::debugpb::CollectPeerCurrentStateResponse> = ::grpcio::Method {
+    ty: ::grpcio::MethodType::Unary,
+    name: "/debugpb.Debug/CollectPeerCurrentState",
+    req_mar: ::grpcio::Marshaller { ser: ::grpcio::pb_ser, de: ::grpcio::pb_de },
+    resp_mar: ::grpcio::Marshaller { ser: ::grpcio::pb_ser, de: ::grpcio::pb_de },
+};
+
 #[derive(Clone)]
 pub struct DebugClient {
     client: ::grpcio::Client,
@@ -320,6 +327,22 @@ impl DebugClient {
     pub fn get_region_properties_async(&self, req: &super::debugpb::GetRegionPropertiesRequest) -> ::grpcio::Result<::grpcio::ClientUnaryReceiver<super::debugpb::GetRegionPropertiesResponse>> {
         self.get_region_properties_async_opt(req, ::grpcio::CallOption::default())
     }
+
+    pub fn collect_peer_current_state_opt(&self, req: &super::debugpb::CollectPeerCurrentStateRequest, opt: ::grpcio::CallOption) -> ::grpcio::Result<super::debugpb::CollectPeerCurrentStateResponse> {
+        self.client.unary_call(&METHOD_DEBUG_COLLECT_PEER_CURRENT_STATE, req, opt)
+    }
+
+    pub fn collect_peer_current_state(&self, req: &super::debugpb::CollectPeerCurrentStateRequest) -> ::grpcio::Result<super::debugpb::CollectPeerCurrentStateResponse> {
+        self.collect_peer_current_state_opt(req, ::grpcio::CallOption::default())
+    }
+
+    pub fn collect_peer_current_state_async_opt(&self, req: &super::debugpb::CollectPeerCurrentStateRequest, opt: ::grpcio::CallOption) -> ::grpcio::Result<::grpcio::ClientUnaryReceiver<super::debugpb::CollectPeerCurrentStateResponse>> {
+        self.client.unary_call_async(&METHOD_DEBUG_COLLECT_PEER_CURRENT_STATE, req, opt)
+    }
+
+    pub fn collect_peer_current_state_async(&self, req: &super::debugpb::CollectPeerCurrentStateRequest) -> ::grpcio::Result<::grpcio::ClientUnaryReceiver<super::debugpb::CollectPeerCurrentStateResponse>> {
+        self.collect_peer_current_state_async_opt(req, ::grpcio::CallOption::default())
+    }
     pub fn spawn<F>(&self, f: F) where F: ::futures::Future<Item = (), Error = ()> + Send + 'static {
         self.client.spawn(f)
     }
@@ -339,6 +362,7 @@ pub trait Debug {
     fn check_region_consistency(&mut self, ctx: ::grpcio::RpcContext, req: super::debugpb::RegionConsistencyCheckRequest, sink: ::grpcio::UnarySink<super::debugpb::RegionConsistencyCheckResponse>);
     fn modify_tikv_config(&mut self, ctx: ::grpcio::RpcContext, req: super::debugpb::ModifyTikvConfigRequest, sink: ::grpcio::UnarySink<super::debugpb::ModifyTikvConfigResponse>);
     fn get_region_properties(&mut self, ctx: ::grpcio::RpcContext, req: super::debugpb::GetRegionPropertiesRequest, sink: ::grpcio::UnarySink<super::debugpb::GetRegionPropertiesResponse>);
+    fn collect_peer_current_state(&mut self, ctx: ::grpcio::RpcContext, req: super::debugpb::CollectPeerCurrentStateRequest, sink: ::grpcio::UnarySink<super::debugpb::CollectPeerCurrentStateResponse>);
 }
 
 pub fn create_debug<S: Debug + Send + Clone + 'static>(s: S) -> ::grpcio::Service {
@@ -394,6 +418,10 @@ pub fn create_debug<S: Debug + Send + Clone + 'static>(s: S) -> ::grpcio::Servic
     let mut instance = s.clone();
     builder = builder.add_unary_handler(&METHOD_DEBUG_GET_REGION_PROPERTIES, move |ctx, req, resp| {
         instance.get_region_properties(ctx, req, resp)
+    });
+    let mut instance = s.clone();
+    builder = builder.add_unary_handler(&METHOD_DEBUG_COLLECT_PEER_CURRENT_STATE, move |ctx, req, resp| {
+        instance.collect_peer_current_state(ctx, req, resp)
     });
     builder.build()
 }
